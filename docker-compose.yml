@@ -118,9 +118,32 @@ services:
       - ac-database
       - ac-authserver
 
+  portainer:
+    container_name: portainer
+    image: portainer/portainer-ce:latest
+    pull_policy: always
+    restart: unless-stopped
+    networks:
+      - ac-network
+    command:
+      - --admin-password-file
+      - /run/secrets/portainer_admin_password
+    ports:
+      - ${DOCKER_PORTAINER_EXTERNAL_PORT:-9443}:9443
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer-data:/data
+    secrets:
+      - portainer_admin_password
+
 volumes:
   ac-database:
   ac-modules:
+  portainer-data:
 
 networks:
   ac-network:
+
+secrets:
+  portainer_admin_password:
+    file: ./secrets/portainer_admin_password.txt
