@@ -1,3 +1,4 @@
 data/**/*.dbc filter=lfs diff=lfs merge=lfs -text
 data/**/*.mmtile filter=lfs diff=lfs merge=lfs -text
 data/**/*.wmo.vmo filter=lfs diff=lfs merge=lfs -text
+*.dbc filter=lfs diff=lfs merge=lfs -text
